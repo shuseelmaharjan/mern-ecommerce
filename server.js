@@ -11,15 +11,23 @@ app.use(express.json());
 app.use(cors());
 
 // import routes
-const userRouters = require('./routes/userRoutes');
+// const userRouters = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userSignup');
+const loginUserRoutes = require('./routes/loginUserRoutes');
+
 
 
 
 // use routes
-app.use('/api', userRouters);
-app.use('/api/auth', authRoutes);
+app.use('/api', userRoutes);
+app.use('/api', loginUserRoutes);
+// app.use('/api/auth', authRoutes);
 
+
+// console.log("authRoutes:", authRoutes);
+console.log("userRoutes:", userRoutes);
+console.log("loginRoutes:", loginUserRoutes);
 
 
 
