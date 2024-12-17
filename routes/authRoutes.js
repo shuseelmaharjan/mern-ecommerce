@@ -1,23 +1,19 @@
-// const express = require('express');
-// const router = express.Router();
+const express = require('express');
+const router = express.Router();
+const authController = require('../controller/authControler');
+const loginLimiter = require('../middleware/loginLimiter')
 
-// const { loginUser} = require('../controllers/authController');
-// const {body} = require('express-validator');
-// const { getUserData } = require('../controllers/authController');
-// const { refreshAccessToken } = require('../service/refreshAccessToken');
-// const { protectRoute } = require('../middleware/protectRoute');
+router.route('/v1/signup')
+    .post(loginLimiter, authController.signup)
 
-// router.post('/v1/logins', [
-//     body('email').isEmail().withMessage('Please provide a valid email'),
-//     body('password').not().isEmpty().withMessage('Password is required'),
-// ], loginUser);
+router.route('/v1/login')
+    .post(loginLimiter, authController.login)
 
-// router.get('/v1/myprofile', getUserData);
+router.route('/v1/refresh')
+    .get(authController.refresh)
 
-// router.post('/v1/refresh-token', refreshAccessToken);
+router.route('/v1/logout')
+    .post(authController.logout)
 
-// router.post('/v1/create-resource', protectRoute, (req, res) => {
-//     res.status(200).json({message:'Resource created successfully'});
-// });
 
-// module.exports = router;
+module.exports = router;
